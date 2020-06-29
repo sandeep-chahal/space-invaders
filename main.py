@@ -54,7 +54,9 @@ def main():
             if press_enter():
                 game_start = True
         elif game_over:
-            gui.show_game_over(screen)
+            screen.fill((0, 0, 0))  # clear screen
+            background.render()
+            gui.show_game_over(screen)  # show game over screen
             bg_music.set_volume(0)
             if press_enter():
                 level = 0
