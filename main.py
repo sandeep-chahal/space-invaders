@@ -26,12 +26,13 @@ def main():
     background = Background(screen, WIDTH, HEIGHT)
     background.render()
 
-    player = Player(screen, 350, 400)
+    player = Player(screen, 350, 400, -5)
 
     while True:
         clock.tick(FPS)  # set fps
         background.scroll(1)
-        gui.show_level(screen, level)
+        # gui.show_level(screen, level)
+        gui.show_level(screen, player.health)
 
         # if no enemy left, level up and generate more
         if(len(enemies) == 0):
@@ -40,9 +41,17 @@ def main():
 
         for enemy in enemies:
             enemy.move()
+            #  if rendering and in base
+            if enemy.rendering:
+                enemy.shoot()
+                enemy.operate_lasers()
+                if enemy.in_base():
+                    player.health -= 10
+                    enemies.remove(enemy)
             enemy.render()
 
         player.init_controller()
+        player.operate_lasers()
         player.render()
 
         pygame.display.update()

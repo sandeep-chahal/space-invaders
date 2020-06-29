@@ -13,7 +13,7 @@ def genrate_enemies(screen, level):
     for i in range(5*level):
         (ship, laser) = random.choice(enemy_ships)
         x, y = gen_pos(enemies, 100, screen.get_width()-100, -1000*level, -100)
-        enemy = Enemy(screen, ship, laser, x, y)
+        enemy = Enemy(screen, ship, laser, x, y, 4)
         enemies.append(enemy)
     return enemies
 
