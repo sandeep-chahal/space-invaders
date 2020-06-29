@@ -6,8 +6,8 @@ import random
 import util
 from background import Background
 from ship import Player
+import gui
 
-pygame.font.init()
 
 # setup screen
 WIDTH, HEIGHT = 800, 600
@@ -26,14 +26,16 @@ def main():
     background = Background(screen, WIDTH, HEIGHT)
     background.render()
 
-    player = Player(screen, 300, 300)
+    player = Player(screen, 350, 400)
 
     while True:
         clock.tick(FPS)  # set fps
         background.scroll(1)
+        gui.show_level(screen, level)
 
+        # if no enemy left, level up and generate more
         if(len(enemies) == 0):
-            level += 5
+            level += 1
             enemies = util.genrate_enemies(screen, level)
 
         for enemy in enemies:
