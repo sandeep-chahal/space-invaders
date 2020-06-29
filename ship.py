@@ -89,7 +89,7 @@ class Ship():
 class Player(Ship):
     def __init__(self, screen, x, y, laser_speed):
         super().__init__(screen, x, y)
-        self.health = 10
+        self.health = 100
         self.ship_img = player_ship
         self.laser_img = player_laser
         self.ship_speed = 3
@@ -126,6 +126,9 @@ class Player(Ship):
     def render(self):
         super().render()
         self.healthbar()
+
+    def gameover(self):
+        return self.health <= 0
 
 
 class Enemy(Ship):
