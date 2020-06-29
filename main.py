@@ -8,11 +8,23 @@ from background import Background
 from ship import Player
 import gui
 
-
 # setup screen
 WIDTH, HEIGHT = 800, 600
 pygame.display.set_caption("Space Invaders")
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+
+# sound setup
+pygame.mixer.init(10100, -16, 2, 64)
+pygame.mixer.init()
+explosion_sound = pygame.mixer.Sound(
+    os.path.join("assets", "explosion_sound.wav"))
+explosion_sound.set_volume(0.7)
+
+pygame.mixer.music.load(os.path.join("assets", "bg_music.wav"))
+bg_music = pygame.mixer.music
+bg_music.play(-1)
+bg_music.set_volume(0.5)
 
 
 def main():
@@ -30,7 +42,7 @@ def main():
 
     while True:
         clock.tick(FPS)  # set fps
-        background.scroll(1)
+        background.scroll(0.5)
         # gui.show_level(screen, level)
         gui.show_level(screen, level)
 
@@ -53,6 +65,7 @@ def main():
                 # check if player laser hits enemy ship
                 for laser in player.lasers:
                     if util.collide(enemy, laser):
+                        explosion_sound.play()
                         player.lasers.remove(laser)
                         enemies.remove(enemy)
                 # check if enemy laser collides with player

@@ -2,6 +2,11 @@ import pygame
 from os import path
 import random
 from laser import Laser
+pygame.mixer.init(10100, -16, 2, 64)
+
+
+shoot_sound = pygame.mixer.Sound(path.join("assets", "shoot_sound.wav"))
+shoot_sound.set_volume(0.5)
 
 
 def scale_ship(ship):
@@ -69,6 +74,7 @@ class Ship():
 
     def shoot(self, x, y):
         if self.shoot_cooldown == 0:
+            shoot_sound.play()
             self.shoot_cooldown = 45
             laser = Laser(self.screen, self.laser_img, x, y, self.laser_speed)
             self.lasers.append(laser)
