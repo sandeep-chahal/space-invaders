@@ -89,7 +89,7 @@ class Ship():
 class Player(Ship):
     def __init__(self, screen, x, y, laser_speed):
         super().__init__(screen, x, y)
-        self.health = 100
+        self.health = 10
         self.ship_img = player_ship
         self.laser_img = player_laser
         self.ship_speed = 3
@@ -115,6 +115,17 @@ class Player(Ship):
             self.x -= self.ship_speed
         if keys[pygame.K_SPACE]:
             self.shoot()
+
+    def healthbar(self):
+        pygame.draw.rect(self.screen, (255, 0, 0), (self.x, self.y +
+                                                    self.get_height()+10, self.get_width(), 10), 0)
+
+        pygame.draw.rect(self.screen, (0, 255, 0), (self.x, self.y +
+                                                    self.get_height()+10, self.health/100*self.get_width(), 10), 0)
+
+    def render(self):
+        super().render()
+        self.healthbar()
 
 
 class Enemy(Ship):
