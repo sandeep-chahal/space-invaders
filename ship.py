@@ -89,6 +89,7 @@ class Player(Ship):
         self.ship_speed = 3
         self.laser_speed = laser_speed
         self.shoot_cooldown = 45
+        self.mask = pygame.mask.from_surface(self.ship_img)
 
     def shoot(self):
         x = self.x+self.ship_img.get_width()/2-2
@@ -120,6 +121,7 @@ class Enemy(Ship):
         self.ship_speed = 1
         self.laser_speed = laser_speed
         self.rendering = False
+        self.mask = pygame.mask.from_surface(self.ship_img)
 
     def render(self):
         # only render if ship visible

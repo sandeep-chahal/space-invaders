@@ -32,24 +32,37 @@ def main():
         clock.tick(FPS)  # set fps
         background.scroll(1)
         # gui.show_level(screen, level)
-        gui.show_level(screen, player.health)
+        gui.show_level(screen, level)
 
         # if no enemy left, level up and generate more
         if(len(enemies) == 0):
             level += 1
             enemies = util.genrate_enemies(screen, level)
 
+        # ----------------------------- enemies -----------------------------
         for enemy in enemies:
-            enemy.move()
-            #  if rendering and in base
+            enemy.move()  # move downward
+            #  if enemy is rendering(if enemy is on screen)
             if enemy.rendering:
-                enemy.shoot()
-                enemy.operate_lasers()
+                enemy.shoot()  # shoot lasers
+                enemy.operate_lasers()  # move lasers
+                # if enemy ship enters base (if it pass by player and goes down the screen)
                 if enemy.in_base():
-                    player.health -= 10
+                    player.health -= 20
                     enemies.remove(enemy)
+                # check if player laser hits enemy ship
+                for laser in player.lasers:
+                    if util.collide(enemy, laser):
+                        player.lasers.remove(laser)
+                        enemies.remove(enemy)
+                # check if enemy laser collides with player
+                for laser in enemy.lasers:
+                    if util.collide(player, laser):
+                        enemy.lasers.remove(laser)
+                        player.health -= 10
             enemy.render()
 
+        # -----------------------------player-----------------------------
         player.init_controller()
         player.operate_lasers()
         player.render()

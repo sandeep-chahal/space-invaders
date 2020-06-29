@@ -1,3 +1,6 @@
+import pygame
+
+
 class Laser():
     def __init__(self, screen, laser_img, x, y, speed):
         self.laser_img = laser_img
@@ -5,6 +8,7 @@ class Laser():
         self.screen = screen
         self.y = y
         self.x = x
+        self.mask = pygame.mask.from_surface(self.laser_img)
 
     def move(self):
         self.y += self.speed
