@@ -1,7 +1,19 @@
 import pygame
 from os import path
+import random
 
 player_ship = pygame.image.load(path.join("assets", "playerShip2_green.png"))
+player_laser = pygame.image.load(path.join("assets", "laserGreen07.png"))
+enemy_ship_black = pygame.image.load(path.join("assets", "enemyBlack2.png"))
+enemy_ship_green = pygame.image.load(path.join("assets", "enemyGreen3.png"))
+enemy_ship_green2 = pygame.image.load(path.join("assets", "enemyGreen4.png"))
+enemy_ship_red = pygame.image.load(path.join("assets", "enemyRed2.png"))
+enemy_ship_red2 = pygame.image.load(path.join("assets", "enemyRed4.png"))
+enemy_laser_red = pygame.image.load(path.join("assets", "laserRed01.png"))
+enemy_laser_green = pygame.image.load(path.join("assets", "laserGreen11.png"))
+
+enemy_ships = [(enemy_ship_black, enemy_laser_red), (enemy_ship_red, enemy_laser_red),
+               (enemy_ship_red2, enemy_laser_red), (enemy_ship_green, enemy_laser_green), (enemy_ship_green2, enemy_laser_green)]
 
 
 class Ship():
@@ -41,6 +53,7 @@ class Player(Ship):
         super().__init__(screen, x, y)
         self.health = 100
         self.ship_img = player_ship
+        self.laser_img = player_laser
         self.ship_speed = 3
 
     def init_controller(self):
@@ -54,3 +67,21 @@ class Player(Ship):
             self.x += self.ship_speed
         if keys[pygame.K_LEFT] and not self.x - self.ship_speed <= 0:
             self.x -= self.ship_speed
+
+
+class Enemy(Ship):
+    def __init__(self, screen, ship, laser, x, y):
+        super().__init__(screen, x, y)
+        self.x = x
+        self.y = y
+        self.ship_img = ship
+        self.laser_img = laser
+        self.ship_speed = 1
+
+    def render(self):
+        # only render if ship visible
+        if not self.y + self.ship_img.get_height() < 0:
+            super().render()
+
+    def move(self):
+        self.y += self.ship_speed
