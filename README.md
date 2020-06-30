@@ -17,6 +17,11 @@ pip install requirements.txt
 python main.py
 ```
 
+## Screenshots
+![space invaders image](https://i.imgur.com/sVzza5a.jpg[/img])
+![space invaders image](https://i.imgur.com/nsm4tfo.jpg[/img])
+
+
 ## Contributing
 Pull requests are welcome.
 
