@@ -18,8 +18,8 @@ python main.py
 ```
 
 ## Screenshots
-![space invaders image](https://i.imgur.com/sVzza5a.jpg[/img] | width=100)
-![space invaders image](https://i.imgur.com/nsm4tfo.jpg[/img] | width=100)
+![space invaders image](https://i.imgur.com/sVzza5a.jpg[/img])
+![space invaders image](https://i.imgur.com/nsm4tfo.jpg[/img])
 
 
 ## Contributing
