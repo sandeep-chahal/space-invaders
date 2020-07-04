@@ -2,7 +2,6 @@
 
 Classic Space Invaders game using python pygame library
 
-Demo and screenshots are coming . . .
 
 ## Installation
 
